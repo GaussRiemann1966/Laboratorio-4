@@ -9,9 +9,19 @@ public class Playlist {
         canciones = new ArrayList<Cancion>();
 
     }
-    public Playlist(String nombre,ArrayList<Cancion> canciones){
+    public Playlist(String nombre, int key ){
         this.nombre = nombre;
-        this.canciones = canciones;
+        switch (key) {
+            case 1:
+                this.canciones.add(new Cancion("November Rain", "Guns N' Roses", "Rock"));
+                this.canciones.add(new Cancion("Welcome to the jungle", "Guns N' Roses", "Rock"));
+                break;
+        
+            case 2:
+            this.canciones.add(new Cancion("Without me", "Eminem", "Rap"));
+            this.canciones.add(new Cancion("The Real Slim Shady", "Eminem", "Rap"));
+                break;
+        }
         
     }
     
@@ -49,9 +59,14 @@ public class Playlist {
      */
     @Override
     public String toString() {
-        return "{" +
-            " Playlist: " + getNombre() +
-            ", emisoras='" + getCanciones() + "'";
+        String cadena = "";
+        for (Cancion cancion : canciones) {
+            cadena = cadena + cancion.getNombre()+"\n";
+        }
+        return
+            "Playlist: " + getNombre() +"\n"+
+            "Canciones: " + cadena+"\n" +
+            getCanciones().get(0).toString()+"\n";
     }
 
     

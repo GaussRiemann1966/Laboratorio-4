@@ -108,11 +108,10 @@ public class Cancion{
      */
     @Override
     public String toString() {
-        return "{" +
-            " nombre='" + getNombre() + "'" +
-            ", autor='" + getAutor() + "'" +
-            ", genero='" + getGenero() + "'" +
-            "}";
+        return "Sonando: \n" +
+            " nombre: " + getNombre() + "\n" +
+            " autor: " + getAutor() + "\n" +
+            " genero: " + getGenero() + "\n";
     }
     
 }

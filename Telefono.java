@@ -4,10 +4,13 @@
  * @date: 10/11/2022
  * Clase telefono: crea una lista de todos los contactos dentro de un telefono. 
  */
+
 import java.util.ArrayList;
 
 public class Telefono{
     private ArrayList<Contacto> contactos;
+    /*Se agrego conectado para verificar si puede usar las funcones relacionadas con telefono */
+    private boolean conectado;
 
     //constructor sin parametros
     public Telefono() {
@@ -45,6 +48,19 @@ public class Telefono{
         return this;
     }
 
+        /**
+     * @return boolean return the conectado
+     */
+    public boolean isConectado() {
+        return conectado;
+    }
+
+    /**
+     * @param conectado the conectado to set
+     */
+    public void setConectado(boolean conectado) {
+        this.conectado = conectado;
+    }
 
     
     /** 
@@ -52,9 +68,10 @@ public class Telefono{
      */
     @Override
     public String toString() {
-        return "{" +
-            " contactos='" + getContactos() + "'" +
-            "}";
+        return "contactos: " + getContactos() + "\n";
     }
     
+
+
+
 }
