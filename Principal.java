@@ -16,20 +16,9 @@ public class Principal {
         int opcion = 1;
 
 
-        Emisoras emisora1 = new Emisoras("FM Joya", "94.5", false);
-        Emisoras emisora2 = new Emisoras("HOla", "94.5", true);
-        Emisoras emisora3 = new Emisoras("FM Norte", "94.5", false);
-        Emisoras emisora4 = new Emisoras("No se", "94.5", true);
-
-        ArrayList<Emisoras> emisoras = new ArrayList<Emisoras>();
-        emisoras.add(emisora1);
-        emisoras.add(emisora2);
-        emisoras.add(emisora3);
-        emisoras.add(emisora4);
+        
 
         String frecuencia = "FM";
-
-        System.out.println("Hola");
         System.out.println(wow.cambiarFrecuencia(frecuencia));
 
         while (opcion>=1 && opcion<6){
@@ -52,6 +41,8 @@ public class Principal {
                     case 2:
                     case 3:
                     case 4:
+                    case 5:
+                    case 6:
                     default:
                         System.out.println("Esperamos que disfrute su viaje");
                     break;

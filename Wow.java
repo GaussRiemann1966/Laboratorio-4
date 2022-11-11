@@ -165,9 +165,6 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
             return "Ha cambiado a "+frecuencia+"\n";
         }
 
-
-
-        
     @Override
     public float cambiarEmisoras(boolean arriba) {
         // TODO Auto-generated method stub
@@ -182,16 +179,16 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
         return 0;
     }
     @Override
-    public void guardarEmisoras(String nombre, String numero, boolean aM) {
+    public void guardarEmisoras() {
         // TODO Auto-generated method stub
-        if(radio.getEmisoras().size() < 50){
-            Emisoras emi = new Emisoras(nombre, numero, aM);
-            radio.getEmisoras().add(emi);
+        if(radio.getEmisorasAM().size() < 50){
+            Emisoras emi = new Emisoras();
+            radio.getEmisorasAM().add(emi);
         }
     }
     @Override
     public String cargarEmisoras(int i) {
         // TODO Auto-generated method stub
-        return radio.getEmisoras().get(i).toString();
+        return radio.getEmisorasAM().get(i).toString();
     }
 }
