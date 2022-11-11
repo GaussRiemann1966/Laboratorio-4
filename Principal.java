@@ -19,6 +19,14 @@ public class Principal {
                         "\n2. Apagar radio";  
         int opcionEncenr = 1;
         
+        String menu4 = "===¿Qué desea hacer en el telefono?=====\n" +
+                        "1. Conectarse/desconectarse\n" +
+                        "2. Mostrar contactos\n" +
+                        "3. Llamar a algún contacto\n" +
+                        "4. Finalizar LLamada en espera\n" +
+                        "5. Cambiar llamada en espera\n";
+        int opcionCelu = 1;
+
         while (opcionEncenr>=1 && opcionEncenr<2){
             try{
                 System.out.println(menu2);
@@ -53,13 +61,36 @@ public class Principal {
                                 op = teclado.nextInt();
                                 teclado.nextLine();
                                 wow.seleccionarPlaylist(op);
-                                
+
 
                                 
                                 
                             case 4:
+                                System.out.println(menu4);
+                                System.out.println("Seleccione una de las opciones:");
+                                opcionCelu = teclado.nextInt();
+                                teclado.nextLine();
+                                int decision =1;
+                                switch(opcionCelu){
+                                    case 1: //conectarse/desconectarse
+                                        wow.conectado();
+                                    case 2: //mostrar contactos
+                                        System.out.println(wow.mostrarContactos());
+                                    case 3: //llamar contactos
+                                        System.out.println(wow.mostrarContactos());
+                                        System.out.println("A que contacto desea llamar?");
+                                        decision = teclado.nextInt();
+                                        teclado.nextLine();
+                                        System.out.println(wow.llamarContactos(decision));
+                                    case 4: //finalizar llamada en espera
+                                        System.out.println(wow.finalizarLlamadaEspera());
+                                    case 5: //cambiar llamada en espera
+                                        System.out.println(wow.cambiarLlamadaEspera());
+                                }
+
                             case 5:
-                        
+                                System.out.println("Este es el clima de hoy");
+                                System.out.println(wow.pronosticoClima());
                            
                         }
                     break;
