@@ -23,12 +23,7 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
         this.conectado = false;
     }
 
-    public Wow(boolean conectado, Radio radio, Telefono contacto, Playlist playlist) {
-        this.conectado = conectado;
-        this.radio = radio;
-        this.contacto = contacto;
-        this.playlist = playlist;
-    }
+    
 
 
     @Override
@@ -108,7 +103,7 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     }
     @Override
     public String seleccionarPlaylist(int decision) {
-        // TODO Auto-generated method stub
+        this.playlist = new Playlist(decision);
         this.playlist = radio.getPlaylists().get(decision-1);
         return this.playlist.toString();
     }

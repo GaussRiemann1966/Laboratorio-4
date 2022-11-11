@@ -6,58 +6,80 @@ public class Principal {
 
         Wow wow = new Wow();
         Scanner teclado = new Scanner(System.in);
-        String menu = " ==== Bienvenido a la radio clase C ====\n" +
-                        "1. Encender o apagar el equipo.\n" +
-                        "2. Subir o bajar el volumen de la consola.\n" +
-                        "3. Escuchar la radio.\n" +
-                        "4. Reproducir alguna canción de una playlist\n" +
-                        "5. Utilizar las utilidades celulares.\n" +
-                        "6. Visualizar el estado del clima.\n";
+        String menu =   "1. Subir o bajar el volumen de la consola.\n" +
+                        "2. Escuchar la radio.\n" +
+                        "3. Reproducir alguna canción de una playlist\n" +
+                        "4. Utilizar las utilidades celulares.\n" +
+                        "5. Visualizar el estado del clima.\n";
         int opcion = 1;
+        int op = 0;
 
-
+        String menu2 = "==== Bienvenido a la radio clase C ====\n" +
+                        "\n1. Enceder radio" +
+                        "\n2. Apagar radio";  
+        int opcionEncenr = 1;
         
-
-        String frecuencia = "FM";
-        System.out.println(wow.cambiarFrecuencia(frecuencia));
-
-        while (opcion>=1 && opcion<6){
+        while (opcionEncenr>=1 && opcionEncenr<2){
             try{
-                System.out.println(menu);
+                System.out.println(menu2);
                 System.out.println("Seleccione una de las opciones:");
-                opcion = teclado.nextInt();
-                switch(opcion){
+                opcionEncenr = teclado.nextInt();
+                teclado.nextLine();
+                switch(opcionEncenr){
                     case 1:
-                        System.out.println("\n¿Desea encender o apagar la radio?");
-                        boolean entradaInicio = false;
-                        if (wow.estadoRadio()){
-                            System.out.println("\nBienvenido a la radio");
-                            entradaInicio = true;
-                        }
-                        else if(wow.estadoRadio() == false){
-                            System.out.println("Que tenga un buen día");
-                        }
+                        System.out.println(menu);
+                        System.out.println("Seleccione una de las opciones:");
+                        opcion = teclado.nextInt();
+                        teclado.nextLine();
+                        switch(opcion){
+                            case 1:
+                                System.out.println("¿Quiere subir volumen(1) o  bajar volumen(2)?");
+                                op = teclado.nextInt();
+                                teclado.nextLine();
+                                if (op == 1){
+                                    System.out.println("El volumen es "+ wow.cambiarVolumen(true));
+                                    
+                                }
+                                if (op==2) {
+                                    System.out.println("El volumen es "+ wow.cambiarVolumen(false));
+                                    
+                                }
+                            break;
+                            case 2:
+                                String frecuencia = "AM";
+                                System.out.println(wow.cambiarFrecuencia(frecuencia));
+                            case 3:
+                                System.out.println("¿Qué Playlist desea excuchar Rock(1) y Rap(2)?");
+                                op = teclado.nextInt();
+                                teclado.nextLine();
+                                wow.seleccionarPlaylist(op);
+                                
 
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    default:
-                        System.out.println("Esperamos que disfrute su viaje");
+                                
+                                
+                            case 4:
+                            case 5:
+                        
+                           
+                        }
                     break;
-                }
+                    
+                    default:
+                        System.out.println("Se apagó la radio");
+
+                    break;
+                }    
             }
             catch (Exception e){
                 teclado.nextLine();
                 System.out.println("\nDebe ingresar un número valido\n");
-                opcion = 1;
-
+                opcionEncenr = 1;
             }
-        
         }
-    
+        
     }
+    
 }
+
 
 
