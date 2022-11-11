@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.locks.ReadWriteLock;
 
 /*
  * @autor: Paolo Consuegra y Alina Carías
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 public class Wow implements modoRadio, modoReproduccion, modoTelefono, productividad{
     Radio radio = new Radio();
     Telefono contacto = new Telefono();
+    Playlist playlist = new Playlist();
 
     //Constructor sin parametros.
     public Wow() {
@@ -23,7 +26,28 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     @Override
     public String pronosticoClima() {
         // TODO Auto-generated method stub
-        return null;
+        int clima = 0;
+        Random random = new Random();
+        clima =  (int)(random.nextDouble()*4);
+        String cadena = "";
+        switch (clima) {
+            case 0:
+                cadena="El día de hoy estará soleado";
+                break;
+            case 1:
+                cadena = "Hoy será un día nubleado";
+                break;
+            case 2:
+                cadena = "Hoy va a llover durante todo el día";
+                break;
+            case 3:
+                cadena = "Comenzará la época de nieve";
+                break;
+            case 4:
+                cadena = "Hoy estaremos a temperatura menores de 0 C";
+                break;
+        }
+        return cadena;
     }
     @Override
     public void conectado() {
@@ -53,54 +77,76 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     @Override
     public String seleccionarPlaylist(int decision) {
         // TODO Auto-generated method stub
-        return null;
+        this.playlist = radio.getPlaylists().get(decision-1);
+        return this.playlist.toString();
     }
     @Override
     public String cambiarCancion(boolean arriba) {
         // TODO Auto-generated method stub
+        String cadena = "";
+        if (arriba == true){
+
+            
+        }
+
         return null;
     }
     @Override
+
     public boolean estadoRadio() {
         // TODO Auto-generated method stub
-        return false;
+        if (radio.getEncendido()==true){
+            radio.setEncendido(false);
+        }    
+        else {
+            radio.setEncendido(true);
+        }
+
+        return radio.isEncendido();
     }
+
     @Override
     public int cambiarVolumen(boolean arriba) {
+        int vol = radio.getVolumen();
         // TODO Auto-generated method stub
-        return 0;
+        if (arriba==true){
+            radio.setVolumen(vol+1);
+        }
+        if (arriba==false){
+            radio.setVolumen(vol-1);
+        }
+        
+        return radio.getVolumen();
     }
+
+
+
     @Override
     public String cambiarFrecuencia(String frecuencia) {
-        ArrayList<Emisoras> AM = new ArrayList<Emisoras>();
-        ArrayList<Emisoras> FM = new ArrayList<Emisoras>();
-        String cadena = "";
         // TODO Auto-generated method stub
-            for (Emisoras emisoras : radio.getEmisoras()) {
-                if (emisoras.getAM()==true) {
-                    AM.add(emisoras);
-                }
+            if (frecuencia.equalsIgnoreCase("AM")){
+                radio.setAM(true);
             }
-            for (Emisoras emisoras : radio.getEmisoras()) {
-                if (emisoras.getAM()==false) {
-                    FM.add(emisoras);
-                }
+            if (frecuencia.equalsIgnoreCase("FM")){
+                radio.setAM(false);
             }
-            if(frecuencia.equalsIgnoreCase("AM")){
-                for (Emisoras emisoras : AM) {
-                    cadena = cadena + emisoras.toString();
-                }
-            }
-            if(frecuencia.equalsIgnoreCase("FM")){
-                for (Emisoras emisoras : FM) {
-                    cadena = cadena + emisoras.toString();
-                }
-            }
-        return cadena;
-    }
+            return "Ha cambiado a "+frecuencia+"\n";
+        }
+
+
+
+        
     @Override
     public float cambiarEmisoras(boolean arriba) {
         // TODO Auto-generated method stub
+
+        float op = 50;
+        if (arriba == true){
+            op = op + 0.5f;
+        }
+        else {
+            op = op - 0.5f;
+        }
         return 0;
     }
     @Override

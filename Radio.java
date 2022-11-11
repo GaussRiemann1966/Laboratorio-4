@@ -7,42 +7,31 @@
 import java.util.ArrayList;
 
 public class Radio{
-    private ArrayList<Cancion> cancion;
+    private ArrayList<Playlist> playlists;
     private ArrayList<Emisoras> emisoras;
     private int volumen;
     private boolean encendido;
+    private boolean AM;
 
     //constructor sin parametros
     public Radio() {
-        cancion = new ArrayList<Cancion>();
+        playlists = new ArrayList<Playlist>();
         emisoras = new ArrayList<Emisoras>();
         volumen = 0;
         encendido = false;
+        AM = true;
     }
 
     //constructor con parametros
-    public Radio(ArrayList<Cancion> cancion, ArrayList<Emisoras> emisoras, int volumen, boolean encendido) {
-        this.cancion = cancion;
+    public Radio(ArrayList<Playlist> playlists, ArrayList<Emisoras> emisoras, int volumen) {
+        this.playlists = playlists;
         this.emisoras = emisoras;
         this.volumen = volumen;
-        this.encendido = encendido;
+        
     }
 
     
-    /** 
-     * @return ArrayList<Cancion>
-     */
-    public ArrayList<Cancion> getCancion() {
-        return this.cancion;
-    }
-
     
-    /** 
-     * @param cancion
-     */
-    public void setCancion(ArrayList<Cancion> cancion) {
-        this.cancion = cancion;
-    }
 
     
     /** 
@@ -105,8 +94,8 @@ public class Radio{
      * @param cancion
      * @return Radio
      */
-    public Radio cancion(ArrayList<Cancion> cancion) {
-        setCancion(cancion);
+    public Radio playlists(ArrayList<Playlist> playlists) {
+        setPlaylists(playlists);
         return this;
     }
 
@@ -140,6 +129,22 @@ public class Radio{
         return this;
     }
 
+    /**
+     * @return boolean return the AM
+     */
+    public boolean isAM() {
+        return AM;
+    }
+
+    /**
+     * @param AM the AM to set
+     */
+    public void setAM(boolean AM) {
+        this.AM = AM;
+    }
+
+    
+
     
     /** 
      * @return String
@@ -147,11 +152,29 @@ public class Radio{
     @Override
     public String toString() {
         return "{" +
-            " cancion='" + getCancion() + "'" +
+            " cancion='" + getPlaylists() + "'" +
             ", emisoras='" + getEmisoras() + "'" +
             ", volumen='" + getVolumen() + "'" +
             ", encendido='" + isEncendido() + "'" +
             "}";
+    }
+
+
+    
+
+
+    /**
+     * @return ArrayList<Playlist> return the playlists
+     */
+    public ArrayList<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    /**
+     * @param playlists the playlists to set
+     */
+    public void setPlaylists(ArrayList<Playlist> playlists) {
+        this.playlists = playlists;
     }
 
 }
