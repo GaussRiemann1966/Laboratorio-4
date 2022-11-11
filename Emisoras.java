@@ -119,7 +119,6 @@ public class Emisoras{
         return "{" +
             " nombre='" + getNombre() + "'" +
             ", numero='" + getNumero() + "'" +
-            ", aM='" + isAM() + "'" +
             "}";
     }
     

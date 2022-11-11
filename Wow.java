@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * @autor: Paolo Consuegra y Alina Carías
  * Carnets: 221097, 22539
@@ -11,6 +13,12 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     //Constructor sin parametros.
     public Wow() {
     }
+
+    public Wow(Radio radio, Telefono contacto) {
+        this.radio = radio;
+        this.contacto =  contacto;
+    }
+
 
     @Override
     public String pronosticoClima() {
@@ -64,8 +72,31 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     }
     @Override
     public String cambiarFrecuencia(String frecuencia) {
+        ArrayList<Emisoras> AM = new ArrayList<Emisoras>();
+        ArrayList<Emisoras> FM = new ArrayList<Emisoras>();
+        String cadena = "";
         // TODO Auto-generated method stub
-        return null;
+            for (Emisoras emisoras : radio.getEmisoras()) {
+                if (emisoras.getAM()==true) {
+                    AM.add(emisoras);
+                }
+            }
+            for (Emisoras emisoras : radio.getEmisoras()) {
+                if (emisoras.getAM()==false) {
+                    FM.add(emisoras);
+                }
+            }
+            if(frecuencia.equalsIgnoreCase("AM")){
+                for (Emisoras emisoras : AM) {
+                    cadena = cadena + emisoras.toString();
+                }
+            }
+            if(frecuencia.equalsIgnoreCase("FM")){
+                for (Emisoras emisoras : FM) {
+                    cadena = cadena + emisoras.toString();
+                }
+            }
+        return cadena;
     }
     @Override
     public float cambiarEmisoras(boolean arriba) {
@@ -78,8 +109,8 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
         
     }
     @Override
-    public void cargarEmisoras() {
+    public String cargarEmisoras() {
         // TODO Auto-generated method stub
-        
+        return "";
     }
 }
