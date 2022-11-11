@@ -1,8 +1,8 @@
 
 public interface modoTelefono {
     public void conectado();
-    public String mostrarConstactos();
-    public String llamarContactos(int desicion);
+    public String mostrarContactos();
+    public String llamarContactos(int decision);
     public String finalizarLlamadaEspera();
     public String cambiarLlamadaEspera();
 

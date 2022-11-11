@@ -9,17 +9,25 @@ import java.util.concurrent.locks.ReadWriteLock;
  * Clase Wow: clase constructora; crea todos los metodos necesitados para realizar un radio completo. 
  */
 public class Wow implements modoRadio, modoReproduccion, modoTelefono, productividad{
-    Radio radio = new Radio();
-    Telefono contacto = new Telefono();
-    Playlist playlist = new Playlist();
+    private boolean conectado;
+    private Radio radio;
+    private Telefono contacto;
+    private Playlist playlist;
+    private int termLLam;
 
     //Constructor sin parametros.
     public Wow() {
+        this.radio = new Radio();
+        this.contacto = new Telefono();
+        this.playlist = new Playlist();
+        this.conectado = false;
     }
 
-    public Wow(Radio radio, Telefono contacto) {
+    public Wow(boolean conectado, Radio radio, Telefono contacto, Playlist playlist) {
+        this.conectado = conectado;
         this.radio = radio;
-        this.contacto =  contacto;
+        this.contacto = contacto;
+        this.playlist = playlist;
     }
 
 
@@ -52,27 +60,51 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     @Override
     public void conectado() {
         // TODO Auto-generated method stub
-        
+        if (this.conectado == false){
+            this.conectado = true;
+        }
+        else{
+            this.conectado = false;
+        }
+    }
+
+    @Override
+    public String mostrarContactos() {
+        // TODO Auto-generated method stub
+        String mensaje = "";
+        int i = 1;
+        for (Contacto contact : contacto.getContactos()) {
+            mensaje = mensaje + "1. " + contact.getNombre() + ": " + contact.getNumero() + "\n";
+            i++;
+        }
+        return mensaje;
     }
     @Override
-    public String mostrarConstactos() {
+    public String llamarContactos(int decision) {
         // TODO Auto-generated method stub
-        return null;
+        termLLam = decision-1;
+        contacto.getContactos().get(termLLam).setEspera(false);
+        return "Llamando a: " + contacto.getContactos().get(termLLam).getNombre();
     }
-    @Override
-    public String llamarContactos(int desicion) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+
     @Override
     public String finalizarLlamadaEspera() {
         // TODO Auto-generated method stub
-        return null;
+        return "Termino la llamada con:" + contacto.getContactos().get(termLLam).getNombre();
     }
     @Override
     public String cambiarLlamadaEspera() {
         // TODO Auto-generated method stub
-        return null;
+        String mensaje = "";
+        if (contacto.getContactos().get(termLLam).getEspera()){
+            contacto.getContactos().get(termLLam).setEspera(false);
+            mensaje = mensaje + "Se ha reanudado la llamada en espera. Hablando con: " + contacto.getContactos().get(termLLam).getNombre() + "\n";
+        }
+        else{
+            contacto.getContactos().get(termLLam).setEspera(true);
+            mensaje = mensaje + "La llamada se ha puesto en espera." + "\n";
+        }
+        return mensaje;
     }
     @Override
     public String seleccionarPlaylist(int decision) {
@@ -150,13 +182,16 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
         return 0;
     }
     @Override
-    public void guardarEmisoras() {
+    public void guardarEmisoras(String nombre, String numero, boolean aM) {
         // TODO Auto-generated method stub
-        
+        if(radio.getEmisoras().size() < 50){
+            Emisoras emi = new Emisoras(nombre, numero, aM);
+            radio.getEmisoras().add(emi);
+        }
     }
     @Override
-    public String cargarEmisoras() {
+    public String cargarEmisoras(int i) {
         // TODO Auto-generated method stub
-        return "";
+        return radio.getEmisoras().get(i).toString();
     }
 }
