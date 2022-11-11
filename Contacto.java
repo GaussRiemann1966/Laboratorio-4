@@ -153,11 +153,8 @@ public class Contacto{
      */
     @Override
     public String toString() {
-        return "{" +
-            " nombre='" + getNombre() + "'" +
-            ", numero='" + getNumero() + "'" +
-            ", espera='" + isEspera() + "'" +
-            ", activo='" + isActivo() + "'" +
-            "}";
+        return
+            "nombre: " + getNombre() + "\n" +
+            "numero: " + getNumero() + "\n";
     }
 }

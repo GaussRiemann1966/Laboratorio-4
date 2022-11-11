@@ -6,18 +6,18 @@
  */
 public class Emisoras{
     private String nombre;
-    private String numero;
+    private float numero;
     private boolean aM;
 
     //contructor sin parametros
     public Emisoras() {
         nombre = "";
-        numero = "";
+        numero = 0;
         aM = false;
     }
 
     //constructor con parametros
-    public Emisoras(String nombre, String numero, boolean aM) {
+    public Emisoras(String nombre, float numero, boolean aM) {
         this.nombre = nombre;
         this.numero = numero;
         this.aM = aM;
@@ -43,7 +43,7 @@ public class Emisoras{
     /** 
      * @return String
      */
-    public String getNumero() {
+    public float getNumero() {
         return this.numero;
     }
 
@@ -51,7 +51,7 @@ public class Emisoras{
     /** 
      * @param numero
      */
-    public void setNumero(String numero) {
+    public void setNumero(float numero) {
         this.numero = numero;
     }
 
@@ -94,7 +94,7 @@ public class Emisoras{
      * @param numero
      * @return Emisoras
      */
-    public Emisoras numero(String numero) {
+    public Emisoras numero(float numero) {
         setNumero(numero);
         return this;
     }
