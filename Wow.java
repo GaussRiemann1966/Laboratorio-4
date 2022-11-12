@@ -74,10 +74,10 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
         String mensaje = "";
         int i = 1;
         for (Contacto contact : contacto.getContactos()) {
-            mensaje = mensaje + "1. " + contact.getNombre() + ": " + contact.getNumero() + "\n";
+            mensaje = mensaje + i+ " "+ contact.getNombre() + ": " + contact.getNumero() + "\n";
             i++;
         }
-        return mensaje;
+    return mensaje;
     }
     @Override
     public String llamarContactos(int decision) {

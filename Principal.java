@@ -20,9 +20,20 @@ public class Principal {
         Playlist playlist1 = new Playlist("Rock", canciones1);
         Playlist playlist2 = new Playlist("Rap", canciones2);
 
+        Contacto contacto1 = new Contacto("Paolo", "22109786", false, false);
+        Contacto contacto2 = new Contacto("Alina", "12345678", false, false);
+
+        ArrayList<Contacto> contactos = new ArrayList<Contacto>();
+        contactos.add(contacto1);
+        contactos.add(contacto2);
+
+        Telefono telefono = new Telefono();
+        telefono.setContactos(contactos);
+
         Wow wow = new Wow();
         wow.getPlaylists().add(playlist1);
         wow.getPlaylists().add(playlist2);
+        wow.setContacto(telefono);
 
         Scanner teclado = new Scanner(System.in);
         String menu =   "1. Subir o bajar el volumen de la consola.\n" +
@@ -172,26 +183,32 @@ public class Principal {
                                 switch(opcionCelu){
                                     case 1: //conectarse/desconectarse
                                         wow.conectado();
+                                        break;
                                     case 2: //mostrar contactos
                                         System.out.println(wow.mostrarContactos());
+                                        break;
                                     case 3: //llamar contactos
                                         System.out.println(wow.mostrarContactos());
                                         System.out.println("A que contacto desea llamar?");
                                         decision = teclado.nextInt();
                                         teclado.nextLine();
                                         System.out.println(wow.llamarContactos(decision));
+                                        break;
                                     case 4: //finalizar llamada en espera
                                         System.out.println(wow.finalizarLlamadaEspera());
+                                        break;
                                     case 5: //cambiar llamada en espera
                                         System.out.println(wow.cambiarLlamadaEspera());
+                                        break;
                                 }
 
                             case 5:
                                 System.out.println("Este es el pronostico del clima");
                                 System.out.println(wow.pronosticoClima());
+                            break;
                            
                         }
-                    break;
+                        break;
                     
                     default:
                         System.out.println("Se apagó la radio");
