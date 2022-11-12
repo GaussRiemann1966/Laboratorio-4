@@ -7,9 +7,10 @@
 import java.util.ArrayList;
 
 public class Radio{
-    private ArrayList<Playlist> playlists;
+    
     private ArrayList<Emisoras> emisorasAM;
     private ArrayList<Emisoras> emisorasFM;
+    private int emisoraNum;
 
     private int volumen;
     private boolean encendido;
@@ -20,7 +21,7 @@ public class Radio{
 
     //constructor sin parametros
     public Radio() {
-        playlists = new ArrayList<Playlist>();
+        
         emisorasAM = new ArrayList<Emisoras>();
         emisorasAM.add(new Emisoras("No se", 85.5f, true));
         emisorasAM.add(new Emisoras("La mejor", 94.5f, true));
@@ -28,15 +29,16 @@ public class Radio{
         emisorasFM = new ArrayList<Emisoras>();
         emisorasFM.add(new Emisoras("FM Joya", 15.5f, false));
         emisorasFM.add(new Emisoras("FM Norte", 105.0f, false));
-        volumen = 0;
+        volumen = 50;
         encendido = false;
         AM = true;
         numCancion = 0;
+        emisoraNum = 0;
     }
 
     //constructor con parametros
-    public Radio(ArrayList<Playlist> playlists, ArrayList<Emisoras> emisorasAM, ArrayList<Emisoras> emisorasFM, int volumen) {
-        this.playlists = playlists;
+    public Radio( ArrayList<Emisoras> emisorasAM, ArrayList<Emisoras> emisorasFM, int volumen) {
+        
         this.emisorasAM = emisorasAM;
         this.emisorasFM= emisorasFM;
         this.volumen = volumen;
@@ -81,16 +83,6 @@ public class Radio{
      */
     public void setEncendido(boolean encendido) {
         this.encendido = encendido;
-    }
-
-    
-    /** 
-     * @param cancion
-     * @return Radio
-     */
-    public Radio playlists(ArrayList<Playlist> playlists) {
-        setPlaylists(playlists);
-        return this;
     }
 
 
@@ -138,7 +130,6 @@ public class Radio{
     @Override
     public String toString() {
         return "{" +
-            " cancion='" + getPlaylists() + "'" +
             ", emisoras='" + getEmisorasAM() + "'" +
             ", volumen='" + getVolumen() + "'" +
             ", encendido='" + isEncendido() + "'" +
@@ -149,19 +140,7 @@ public class Radio{
     
 
 
-    /**
-     * @return ArrayList<Playlist> return the playlists
-     */
-    public ArrayList<Playlist> getPlaylists() {
-        return playlists;
-    }
-
-    /**
-     * @param playlists the playlists to set
-     */
-    public void setPlaylists(ArrayList<Playlist> playlists) {
-        this.playlists = playlists;
-    }
+    
 
 
 
@@ -208,6 +187,21 @@ public class Radio{
      */
     public void setEmisorasFM(ArrayList<Emisoras> emisorasFM) {
         this.emisorasFM = emisorasFM;
+    }
+
+
+    /**
+     * @return int return the emisoraNum
+     */
+    public int getEmisoraNum() {
+        return emisoraNum;
+    }
+
+    /**
+     * @param emisoraNum the emisoraNum to set
+     */
+    public void setEmisoraNum(int emisoraNum) {
+        this.emisoraNum = emisoraNum;
     }
 
 }

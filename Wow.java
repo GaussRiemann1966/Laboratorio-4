@@ -14,12 +14,17 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     private Telefono contacto;
     private Playlist playlist;
     private int termLLam;
+    private ArrayList<Emisoras> emisorasFAv;
+    private ArrayList<Playlist> playlists;
+    
 
     //Constructor sin parametros.
     public Wow() {
         this.radio = new Radio();
         this.contacto = new Telefono();
         this.playlist = new Playlist();
+        this.playlists = new ArrayList<Playlist>();
+        this.emisorasFAv = new ArrayList<Emisoras>();
         this.conectado = false;
     }
 
@@ -103,8 +108,7 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     }
     @Override
     public String seleccionarPlaylist(int decision) {
-        this.playlist = new Playlist(decision);
-        this.playlist = radio.getPlaylists().get(decision-1);
+        this.playlist = playlists.get(decision-1);
         return this.playlist.toString();
     }
     @Override
@@ -117,10 +121,9 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
                     cadena = playlist.getCanciones().get(radio.getNumCancion()).toString();
             }
             if (arriba == false && radio.getNumCancion()> 0 ){
-                if (radio.getNumCancion()> 0 ){
                     radio.setNumCancion(radio.getNumCancion()-1);
                     cadena = playlist.getCanciones().get(radio.getNumCancion()).toString();
-                }
+                
             }
     } catch (Exception e) {
         // TODO: handle exception
@@ -162,7 +165,6 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
 
     @Override
     public String cambiarFrecuencia(String frecuencia) {
-        // TODO Auto-generated method stub
             if (frecuencia.equalsIgnoreCase("AM")){
                 radio.setAM(true);
             }
@@ -173,31 +175,174 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
         }
 
     @Override
-    public float cambiarEmisoras(boolean arriba) {
-        // TODO Auto-generated method stub
+    public String cambiarEmisoras(boolean arriba) {
+        try {
+            if (radio.isAM()==true){
+                if (arriba==true && radio.getEmisoraNum() < radio.getEmisorasAM().size()){
+                    radio.setEmisoraNum(radio.getEmisoraNum()+1);
+                    return radio.getEmisorasAM().get(radio.getEmisoraNum()).toString();
+                }
+                if (arriba==false && radio.getEmisoraNum()>0){
+                    radio.setEmisoraNum(radio.getEmisoraNum()-1);
+                    return radio.getEmisorasAM().get(radio.getEmisoraNum()).toString();
+                }
+            }
+            if (radio.isAM()==false){
+                if (arriba==true && radio.getEmisoraNum() < radio.getEmisorasFM().size()){
+                    radio.setEmisoraNum(radio.getEmisoraNum()+1);
+                    return radio.getEmisorasAM().get(radio.getEmisoraNum()).toString();
+                }
+                if (arriba==false && radio.getEmisoraNum()>0){
+                    radio.setEmisoraNum(radio.getEmisoraNum()-1);
+                    return radio.getEmisorasAM().get(radio.getEmisoraNum()).toString();
+                }
+            }
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+            radio.setEmisoraNum(0);
+            return "Ingrese una opcion correcta";
+            
+        }
         
-        return 0;
+        
+        
+        return "";
     }
+
     @Override
     public void guardarEmisoras() {
-        // TODO Auto-generated method stub
-        if(radio.getEmisorasAM().size() < 50){
+        
+        if(radio.isAM()==true && radio.getEmisorasAM().size() < 50){
             Emisoras emi = new Emisoras();
-            radio.getEmisorasAM().add(emi);
+            emisorasFAv.add(emi);
+        }
+        if(radio.isAM()==false && radio.getEmisorasFM().size() < 50){
+            Emisoras emi = new Emisoras();
+            emisorasFAv.add(emi);
         }
     }
     @Override
     public String cargarEmisoras(int i) {
-        // TODO Auto-generated method stub
-        return radio.getEmisorasAM().get(i).toString();
+
+        for (Emisoras emisora : emisorasFAv) {
+            if (emisorasFAv.get(i)!=null) {
+                return emisora.toString();
+                
+            }
+        }
+        return "Ingrese una opción válida";
     }
 
 
 
 
-    @Override
+    
     public String mostrarPlaylist() {
         // TODO Auto-generated method stub
-        return null;
+        int i = 1;
+        String cadena = "";
+        for (Playlist playList : playlists) {
+            
+            cadena = cadena + i+" "+playList.toString()+"\n";
+            i++;
+        }
+        return cadena;
     }
+
+    /**
+     * @return boolean return the conectado
+     */
+    public boolean isConectado() {
+        return conectado;
+    }
+
+    /**
+     * @param conectado the conectado to set
+     */
+    public void setConectado(boolean conectado) {
+        this.conectado = conectado;
+    }
+
+    /**
+     * @return Radio return the radio
+     */
+    public Radio getRadio() {
+        return radio;
+    }
+
+    /**
+     * @param radio the radio to set
+     */
+    public void setRadio(Radio radio) {
+        this.radio = radio;
+    }
+
+    /**
+     * @param contacto the contacto to set
+     */
+    public void setContacto(Telefono contacto) {
+        this.contacto = contacto;
+    }
+
+    /**
+     * @param playlist the playlist to set
+     */
+    public void setPlaylist(Playlist playlist) {
+        this.playlist = playlist;
+    }
+
+    /**
+     * @return int return the termLLam
+     */
+    public int getTermLLam() {
+        return termLLam;
+    }
+
+    /**
+     * @param termLLam the termLLam to set
+     */
+    public void setTermLLam(int termLLam) {
+        this.termLLam = termLLam;
+    }
+
+
+    /**
+     * @return ArrayList<Emisoras> return the emisorasFAv
+     */
+    public ArrayList<Emisoras> getEmisorasFAv() {
+        return emisorasFAv;
+    }
+
+    /**
+     * @param emisorasFAv the emisorasFAv to set
+     */
+    public void setEmisorasFAv(ArrayList<Emisoras> emisorasFAv) {
+        this.emisorasFAv = emisorasFAv;
+    }
+
+
+
+    /**
+     * @param playlists the playlists to set
+     */
+    public void setPlaylists(ArrayList<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
+
+    /**
+     * @return Playlist return the playlist
+     */
+    public Playlist getPlaylist() {
+        return playlist;
+    }
+
+    /**
+     * @return ArrayList<Playlist> return the playlists
+     */
+    public ArrayList<Playlist> getPlaylists() {
+        return playlists;
+    }
+
 }

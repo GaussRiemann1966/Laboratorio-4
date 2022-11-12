@@ -9,22 +9,9 @@ public class Playlist {
         canciones = new ArrayList<Cancion>();
 
     }
-    public Playlist(int key ){
+    public Playlist(String nombre, ArrayList<Cancion> canciones){
         this.nombre = nombre;
-        switch (key) {
-            case 1:
-                this.nombre = "Rock";
-                this.canciones.add(new Cancion("November Rain", "Guns N' Roses", "Rock"));
-                this.canciones.add(new Cancion("Welcome to the jungle", "Guns N' Roses", "Rock"));
-                break;
-        
-            case 2:
-                this.nombre = "Rap";
-                this.canciones.add(new Cancion("Without me", "Eminem", "Rap"));
-                this.canciones.add(new Cancion("The Real Slim Shady", "Eminem", "Rap"));
-                break;
-        }
-        
+        this.canciones = canciones;
     }
     
 
