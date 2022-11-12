@@ -111,13 +111,25 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     public String cambiarCancion(boolean arriba) {
         // TODO Auto-generated method stub
         String cadena = "";
-        if (arriba == true){
-
-            
+        try {
+            if (arriba == true && radio.getNumCancion() < playlist.getCanciones().size()){
+                    radio.setNumCancion(radio.getNumCancion()+1);
+                    cadena = playlist.getCanciones().get(radio.getNumCancion()).toString();
+            }
+            if (arriba == false && radio.getNumCancion()> 0 ){
+                if (radio.getNumCancion()> 0 ){
+                    radio.setNumCancion(radio.getNumCancion()-1);
+                    cadena = playlist.getCanciones().get(radio.getNumCancion()).toString();
+                }
+            }
+    } catch (Exception e) {
+        // TODO: handle exception
+        radio.setNumCancion(0);
+        return "Has reiniciado la playList";
         }
-
-        return null;
+    return cadena;
     }
+
     @Override
 
     public boolean estadoRadio() {
@@ -163,14 +175,7 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     @Override
     public float cambiarEmisoras(boolean arriba) {
         // TODO Auto-generated method stub
-
-        float op = 50;
-        if (arriba == true){
-            op = op + 0.5f;
-        }
-        else {
-            op = op - 0.5f;
-        }
+        
         return 0;
     }
     @Override
@@ -185,5 +190,14 @@ public class Wow implements modoRadio, modoReproduccion, modoTelefono, productiv
     public String cargarEmisoras(int i) {
         // TODO Auto-generated method stub
         return radio.getEmisorasAM().get(i).toString();
+    }
+
+
+
+
+    @Override
+    public String mostrarPlaylist() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
